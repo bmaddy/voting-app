@@ -4,9 +4,30 @@ export function setEntries(state, entries) {
   return state.set('entries', List(entries));
 }
 
+function getWinners(vote) {
+  if (!vote) return [];
+  const [a, b] = vote.get('pair');
+  const aVotes = vote.getIn(['tally', a]);
+  const bVotes = vote.getIn(['tally', b]);
+  if (aVotes > bVotes) return [a];
+  else if (aVotes < bVotes) return [b];
+  else return [a, b];
+}
+
 export function next(state) {
-  return state.merge({
-    vote: Map({pair: state.get('entries').take(2)}),
-    entries: state.get('entries').skip(2)
-  });
+  const entries = state.get('entries').concat(getWinners(state.get('vote')));
+  if (entries.size === 1) {
+    return state.remove('vote')
+                .remove('entries')
+                .set('winner', entries.first());
+  } else {
+    return state.merge({
+      vote: Map({pair: state.get('entries').take(2)}),
+      entries: entries.skip(2)
+    });
+  }
+}
+
+export function vote(state, entry) {
+  return state.updateIn(['vote', 'tally', entry], 0, tally => tally + 1);
 }
