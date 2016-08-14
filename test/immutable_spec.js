@@ -64,6 +64,6 @@ describe('immutability', () => {
           '28 Days Later'
         )
       }));
-    })
+    });
   })
 });
