@@ -24,6 +24,7 @@
     "mocha": "^3.0.2"
   },
   "dependencies": {
-    "immutable": "^3.8.1"
+    "immutable": "^3.8.1",
+    "redux": "^3.5.2"
   }
 }
