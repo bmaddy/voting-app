@@ -11,6 +11,8 @@ module.exports = {
     require.resolve('webpack-dev-server/client') + '?/',
     require.resolve('webpack/hot/dev-server'),
     require.resolve('./polyfills'),
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
     path.join(paths.appSrc, 'index')
   ],
   output: {
@@ -50,8 +52,8 @@ module.exports = {
       {
         test: /\.js$/,
         include: paths.appSrc,
-        loader: 'babel',
-        query: require('./babel.dev')
+        loader: 'react-hot!babel'
+        //query: require('./babel.dev')
       },
       {
         test: /\.css$/,
@@ -99,5 +101,8 @@ module.exports = {
     // Note: only CSS is currently hot reloaded
     new webpack.HotModuleReplacementPlugin(),
     new CaseSensitivePathsPlugin()
-  ]
+  ],
+  devServer: {
+    hot: true
+  }
 };
