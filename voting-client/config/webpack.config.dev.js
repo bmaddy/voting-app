@@ -52,8 +52,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: paths.appSrc,
-        loader: 'react-hot!babel'
-        //query: require('./babel.dev')
+        loader: ('react-hot!babel?' + JSON.stringify(require('./babel.dev')))
       },
       {
         test: /\.css$/,
