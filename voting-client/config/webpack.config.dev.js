@@ -11,8 +11,6 @@ module.exports = {
     require.resolve('webpack-dev-server/client') + '?/',
     require.resolve('webpack/hot/dev-server'),
     require.resolve('./polyfills'),
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
     path.join(paths.appSrc, 'index')
   ],
   output: {
