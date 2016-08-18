@@ -22,6 +22,9 @@ store.dispatch({
 });
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state',state =>
+  store.dispatch({type: 'SET_STATE', state})
+);
 
 const routes = <Route component={App}>
   <Route path="/" component={VotingContainer} />
