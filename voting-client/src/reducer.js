@@ -9,10 +9,12 @@ function vote(state, entry) {
 function setState(oldState, newState) {
   const oldPair = oldState.getIn(['vote', 'pair']);
   const newPair = fromJS(newState).getIn(['vote', 'pair']);
-  if (newPair === oldPair)
+  if (newPair && newPair.equals(oldPair)) {
     return oldState.merge(newState);
-  else
+  }
+  else {
     return oldState.merge(newState).delete('hasVoted');
+  }
 }
 
 export default function reducer(state = fromJS({}), action) {

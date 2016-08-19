@@ -42,8 +42,8 @@ export const Results = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    pair: state.getIn(['voting', 'pair']),
-    tally: state.getIn(['voting', 'tally']),
+    pair: state.getIn(['vote', 'pair']),
+    tally: state.getIn(['vote', 'tally']),
     winner: state.get('winner')
   };
 }
