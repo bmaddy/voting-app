@@ -81,6 +81,29 @@ describe('reducer', () => {
     }));
   });
 
+  it('keeps hasVoted on SET_STATE if the pair is unchanged', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['Trainspotting', '28 Days Later'],
+        tally: {Trainspotting: 1}
+      },
+      hasVoted: 'Trainspotting'
+    });
+    const action = {type: 'SET_STATE', state: {
+      vote: {
+        pair: ['Trainspotting', '28 Days Later']
+      }
+    }};
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      vote: {
+        pair: ['Trainspotting', '28 Days Later']
+      },
+      hasVoted: 'Trainspotting'
+    }));
+  })
+
   it('handles VOTE by setting hasVoted', () => {
     const state = fromJS({
       vote: {
