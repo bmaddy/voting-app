@@ -86,4 +86,23 @@ describe('reducer', () => {
       winner: 'Trainspotting'
     }));
   });
+
+  it('performs the last vote', () => {
+    const state = fromJS({
+      entries: [ '127 Hours' ],
+      vote: {
+        pair: [ 'Trainspotting', '28 Days Later' ],
+        tally: { Trainspotting: 1 }
+      }
+    });
+    const action = {type: 'NEXT'};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      entries: [],
+      vote: {
+        pair: ['127 Hours', 'Trainspotting' ]
+      }
+    }));
+  });
 });
