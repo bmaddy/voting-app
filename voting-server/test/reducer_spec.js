@@ -71,4 +71,19 @@ describe('reducer', () => {
       winner: 'Trainspotting'
     }));
   });
+
+  it('selects winners when only one has a vote', () => {
+    const state = fromJS({ entries: [],
+      vote: {
+        pair: [ 'Shallow Grave', 'Trainspotting' ],
+        tally: { Trainspotting: 1 }
+      }
+    });
+    const action = {type: 'NEXT'};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.equal(fromJS({
+      winner: 'Trainspotting'
+    }));
+  });
 });
